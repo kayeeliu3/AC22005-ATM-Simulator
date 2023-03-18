@@ -9,6 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ConsoleApplication3
@@ -126,7 +127,6 @@ namespace ConsoleApplication3
 
         Bank bank = new Bank(); // generic bank instance
         Account activeAccount; // stores active account details
-        Form2 ATMForm = new Form2(); // stores instance of new ATM form
 
         TextBox tbAccNum = new TextBox(); // stores account number text
         TextBox tbPin = new TextBox(); // stores PIN text
@@ -187,7 +187,7 @@ namespace ConsoleApplication3
                     {
                         if (activeAccount.checkPin(j))
                         {
-                            MessageBox.Show("Valid! Do actual ATM stuff after this.", "Confirmation", MessageBoxButtons.OK);
+                            accountMenu();
                         }
                         else
                             MessageBox.Show("Wrong PIN.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -203,11 +203,64 @@ namespace ConsoleApplication3
         }
 
         /*
-         * Instantiate a new Form that simulates a new ATM
+         * Creation of a new thread to handle separate ATMs
          */
         private void btnNewATM_Click(object sender, EventArgs e)
         {
-            ATMForm.Show();
+            Thread threadATM = new Thread(new ThreadStart(newFormATM));
+            threadATM.Start();
+        }
+
+        /*
+         * Creation of a new form for the newly made thread
+         */
+        private void newFormATM()
+        {
+            Form1 newATMForm = new Form1(); // stores instance of new ATM form
+            newATMForm.ShowDialog();
+        }
+
+        /*
+         * Menu display after account num and PIN are valid - shows balance
+         * and other relevant details and option to withdraw cash and logout
+         */
+        private void accountMenu()
+        {
+            clearForm();
+            Label lblAccountNum = new Label();
+            Label lblBalance = new Label();
+            Button btnWithdraw = new Button();
+            Button btnLogout = new Button();
+
+            lblAccountNum.SetBounds(this.ClientSize.Width / 2 - 250, this.ClientSize.Height / 2 - 150, 150, 25);
+            lblBalance.SetBounds(this.ClientSize.Width / 2 - 250, this.ClientSize.Height / 2 - 125, 150, 25);
+            btnWithdraw.SetBounds(this.ClientSize.Width / 2 - 50, this.ClientSize.Height / 2 - 50, 100, 50);
+            btnLogout.SetBounds(this.ClientSize.Width / 2 - 50, this.ClientSize.Height / 2, 100, 50);
+            lblBalance.Text = "Balance: " + activeAccount.getBalance();
+            lblAccountNum.Text = "Account Num: " + activeAccount.getAccountNum();
+            btnWithdraw.Text = "Withdraw";
+            btnLogout.Text = "Logout";
+
+            btnWithdraw.Click += new EventHandler(this.btnWithdraw_Click);
+            btnLogout.Click += new EventHandler(this.btnLogout_Click); 
+            Controls.Add(lblAccountNum);
+            Controls.Add(lblBalance);
+            Controls.Add(btnWithdraw);
+            Controls.Add(btnLogout);
+        }
+
+        /* 
+         * Logout of account menu and return to main menu
+         */
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            clearForm();
+            initMenu();
+        }
+
+        private void btnWithdraw_Click(object sender, EventArgs e)
+        {
+            // insert code for withdrawing (critical code?)
         }
 
         /* 
