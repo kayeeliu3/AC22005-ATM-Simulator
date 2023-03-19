@@ -59,6 +59,7 @@ namespace ConsoleApplication3
             private int balance;
             private int pin;
             private int accountNum;
+            //private string accountName;
 
             //constructor taking initial values for each attribute
             public Account(int balance, int pin, int accountNum)
@@ -66,6 +67,7 @@ namespace ConsoleApplication3
                 this.balance = balance;
                 this.pin = pin;
                 this.accountNum = accountNum;
+                //this.accountName = accountName;
             }
 
             //getter and setter functions for balance
@@ -130,6 +132,7 @@ namespace ConsoleApplication3
 
         TextBox tbAccNum = new TextBox(); // stores account number text
         TextBox tbPin = new TextBox(); // stores PIN text
+        //TextBox tbAccName = new TextBox(); // stores name of the account holder
 
         public Form1()
         {
@@ -147,24 +150,9 @@ namespace ConsoleApplication3
          */
         private void initMenu()
         {
-            Label lblInstruct = new Label();
             Button btnSubmit = new Button();
             Button btnNewATM = new Button();
 
-            lblInstruct.SetBounds(this.ClientSize.Width / 2 - 75, this.ClientSize.Height / 2 - 100, 150, 50);
-            tbAccNum.SetBounds(this.ClientSize.Width / 2 - 75, this.ClientSize.Height / 2 - 50, 150, 50);
-            tbPin.SetBounds(this.ClientSize.Width / 2 - 75, this.ClientSize.Height / 2, 150, 50);
-            btnSubmit.SetBounds(this.ClientSize.Width / 2 - 50, this.ClientSize.Height / 2 + 50, 100, 50);
-            btnNewATM.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 + 100, 100, 50);
-            lblInstruct.Text = "Please enter your Account Number and PIN.";
-            tbAccNum.Text = "Account Number";
-            tbPin.Text = "PIN";
-            btnSubmit.Text = "Submit";
-            btnNewATM.Text = "New ATM";
-
-            btnNewATM.Click += new EventHandler(this.btnNewATM_Click);
-            btnSubmit.Click += new EventHandler(this.btnSubmit_Click);
-            Controls.Add(lblInstruct);
             Controls.Add(tbAccNum);
             Controls.Add(tbPin);
             Controls.Add(btnSubmit);
@@ -175,7 +163,7 @@ namespace ConsoleApplication3
          * Check if account details and PIN are valid and match.
          * Shows error message if invalid.
          */
-        private void btnSubmit_Click(object sender, EventArgs e)
+        private void btnSubmit_Click_1(object sender, EventArgs e)
         {
             int i, j;
             if (int.TryParse(tbAccNum.Text, out i))
@@ -202,10 +190,7 @@ namespace ConsoleApplication3
                 MessageBox.Show("Please only use numbers for account number and PIN.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        /*
-         * Instantiate a new Form that simulates a new ATM
-         */
-        private void btnNewATM_Click(object sender, EventArgs e)
+        private void btnNewATM_Click_1(object sender, EventArgs e)
         {
             ATMForm.Show();
         }
@@ -242,5 +227,6 @@ namespace ConsoleApplication3
                 Controls.Remove(image);
             }
         }
+
     }
 }
