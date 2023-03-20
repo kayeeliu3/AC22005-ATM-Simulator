@@ -130,8 +130,8 @@ namespace ConsoleApplication3
         Bank bank = new Bank(); // generic bank instance
         Account activeAccount; // stores active account details
 
-        TextBox tbAccNum = new TextBox(); // stores account number text
-        TextBox tbPin = new TextBox(); // stores PIN text
+        //TextBox tbAccNum = new TextBox(); // stores account number text
+        //TextBox tbPin = new TextBox(); // stores PIN text
         //TextBox tbAccName = new TextBox(); // stores name of the account holder
 
         public Form1()
@@ -150,13 +150,13 @@ namespace ConsoleApplication3
          */
         private void initMenu()
         {
-            Button btnSubmit = new Button();
-            Button btnNewATM = new Button();
+            //Button btnSubmit = new Button();
+            //Button btnNewATM = new Button();
 
-            Controls.Add(tbAccNum);
-            Controls.Add(tbPin);
-            Controls.Add(btnSubmit);
-            Controls.Add(btnNewATM);
+            //Controls.Add(tbAccNum);
+            //Controls.Add(tbPin);
+            //Controls.Add(btnSubmit);
+            //Controls.Add(btnNewATM);
         }
 
         /*
@@ -215,6 +215,7 @@ namespace ConsoleApplication3
         private void accountMenu()
         {
             clearForm();
+            this.BackgroundImage = Properties.Resources.Options;
             Label lblAccountNum = new Label();
             Label lblBalance = new Label();
             Button btnWithdraw = new Button();
@@ -230,7 +231,7 @@ namespace ConsoleApplication3
             btnLogout.Text = "Logout";
 
             btnWithdraw.Click += new EventHandler(this.btnWithdraw_Click);
-            btnLogout.Click += new EventHandler(this.btnLogout_Click); 
+            btnLogout.Click += new EventHandler(this.btnLogout_Click);
             Controls.Add(lblAccountNum);
             Controls.Add(lblBalance);
             Controls.Add(btnWithdraw);
@@ -243,7 +244,8 @@ namespace ConsoleApplication3
         private void btnLogout_Click(object sender, EventArgs e)
         {
             clearForm();
-            initMenu();
+            this.BackgroundImage = Properties.Resources.End;
+            //initMenu();
         }
 
         private void btnWithdraw_Click(object sender, EventArgs e)

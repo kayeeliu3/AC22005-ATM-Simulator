@@ -82,22 +82,21 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Screenshot 2023-03-19 210646.png" />
+    <None Include="Resources\MainMenu.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Screenshot 2023-03-19 210717.png" />
+    <None Include="Resources\Options.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Screenshot 2023-03-19 210736.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Screenshot 2023-03-19 210757.png" />
+    <Content Include="Resources\Cash.png" />
+    <Content Include="Resources\End.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

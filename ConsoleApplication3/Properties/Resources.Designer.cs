@@ -63,9 +63,9 @@ namespace ConsoleApplication3.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Screenshot_2023_03_19_210646 {
+        internal static System.Drawing.Bitmap Cash {
             get {
-                object obj = ResourceManager.GetObject("Screenshot 2023-03-19 210646", resourceCulture);
+                object obj = ResourceManager.GetObject("Cash", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace ConsoleApplication3.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Screenshot_2023_03_19_210717 {
+        internal static System.Drawing.Bitmap End {
             get {
-                object obj = ResourceManager.GetObject("Screenshot 2023-03-19 210717", resourceCulture);
+                object obj = ResourceManager.GetObject("End", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace ConsoleApplication3.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Screenshot_2023_03_19_210736 {
+        internal static System.Drawing.Bitmap MainMenu {
             get {
-                object obj = ResourceManager.GetObject("Screenshot 2023-03-19 210736", resourceCulture);
+                object obj = ResourceManager.GetObject("MainMenu", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace ConsoleApplication3.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Screenshot_2023_03_19_210757 {
+        internal static System.Drawing.Bitmap Options {
             get {
-                object obj = ResourceManager.GetObject("Screenshot 2023-03-19 210757", resourceCulture);
+                object obj = ResourceManager.GetObject("Options", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

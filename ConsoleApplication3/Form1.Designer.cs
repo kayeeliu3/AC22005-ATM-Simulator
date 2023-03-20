@@ -28,25 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbAccNum = new System.Windows.Forms.TextBox();
+            this.tbPin = new System.Windows.Forms.TextBox();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.btnNewATM = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox1
+            // tbAccNum
             // 
-            this.textBox1.Location = new System.Drawing.Point(507, 243);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(314, 26);
-            this.textBox1.TabIndex = 0;
+            this.tbAccNum.Location = new System.Drawing.Point(507, 243);
+            this.tbAccNum.Name = "tbAccNum";
+            this.tbAccNum.Size = new System.Drawing.Size(314, 26);
+            this.tbAccNum.TabIndex = 0;
             // 
-            // textBox2
+            // tbPin
             // 
-            this.textBox2.Location = new System.Drawing.Point(507, 357);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(314, 26);
-            this.textBox2.TabIndex = 1;
+            this.tbPin.Location = new System.Drawing.Point(507, 357);
+            this.tbPin.Name = "tbPin";
+            this.tbPin.Size = new System.Drawing.Size(314, 26);
+            this.tbPin.TabIndex = 1;
             // 
             // btnSubmit
             // 
@@ -74,13 +74,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.BackgroundImage = global::ConsoleApplication3.Properties.Resources.Screenshot_2023_03_19_210646;
+            this.BackgroundImage = global::ConsoleApplication3.Properties.Resources.MainMenu;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(900, 562);
             this.Controls.Add(this.btnNewATM);
             this.Controls.Add(this.btnSubmit);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbPin);
+            this.Controls.Add(this.tbAccNum);
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
@@ -93,8 +93,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbAccNum;
+        private System.Windows.Forms.TextBox tbPin;
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.Button btnNewATM;
     }
