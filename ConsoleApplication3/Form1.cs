@@ -17,16 +17,16 @@ namespace ConsoleApplication3
 {
     public partial class WelcomeScreen : Form
     {
-        /*
-        * Class Bank containing array of account objects
-        */
+        /// <summary>
+        /// Bank class containing array of account objects.
+        /// </summary>
         class Bank
         {
             private Account[] ac = new Account[3];
 
-            /*
-             * This function initialises the 3 accounts
-             */
+            /// <summary>
+            /// Initialises 3 accounts.
+            /// </summary>
             public Bank()
             {
                 ac[0] = new Account(300, 1111, 111111, "Ananya");
@@ -34,13 +34,11 @@ namespace ConsoleApplication3
                 ac[2] = new Account(3000, 3333, 333333, "Kae");
             }
 
-            /*
-             * Check if account number exists in Bank
-             *
-             * Returns:
-             * Account object if that account number that exists
-             * null if they do not
-             */
+            /// <summary>
+            /// Check if account number exists in Bank.
+            /// </summary>
+            /// <param name="accNumEntered">Account number to check.</param>
+            /// <returns>Returns account object if the account number exists, else returns null.</returns>
             public Account checkAccExists(int accNumEntered)
             {
                 foreach (Account acc in this.ac)
@@ -52,18 +50,25 @@ namespace ConsoleApplication3
                 return null;
             }
         }
-        /*
-         * The Account class encapusulates all features of a simple bank account
-         */
+
+        /// <summary>
+        /// Encapsulates all features of a simple bank account.
+        /// </summary>
         class Account
         {
-            //attributes for account
+            // Attributes for account.
             private int balance;
             private int pin;
             private int accountNum;
             private string accountName;
 
-            //constructor taking initial values for each attribute
+            /// <summary>
+            /// Construct new bank account
+            /// </summary>
+            /// <param name="balance">Initial balance of the bank account.</param>
+            /// <param name="pin">Pin of the bank account.</param>
+            /// <param name="accountNum">Account number of the bank account.</param>
+            /// <param name="accountName">Name of the bank account owner.</param>
             public Account(int balance, int pin, int accountNum, string accountName)
             {
                 this.balance = balance;
@@ -72,7 +77,7 @@ namespace ConsoleApplication3
                 this.accountName = accountName;
             }
 
-            //getter and setter functions for balance
+            // Getter and setter functions for balance.
             public int getBalance()
             {
                 return balance;
@@ -87,15 +92,11 @@ namespace ConsoleApplication3
                 return accountName;
             }
 
-            /*
-             *   This funciton allows us to decrement the balance of an account
-             *   it performs a simple check to ensure the balance is greater than
-             *   the amount being withdrawn
-             *   
-             *   Returns:
-             *   true if the transactions if possible
-             *   false if there are insufficent funds in the account
-             */
+            /// <summary>
+            /// Decrements balance of an account.
+            /// </summary>
+            /// <param name="amount">Amount to deduct.</param>
+            /// <returns>True if successful, false if insufficient funds in account.</returns>
             public Boolean decrementBalance(int amount)
             {
                 if (this.balance > amount)
@@ -109,13 +110,11 @@ namespace ConsoleApplication3
                 }
             }
 
-            /*
-             * This function check the account pin against the argument passed to it
-             *
-             * Returns:
-             * true if they match
-             * false if they do not
-             */
+            /// <summary>
+            /// Check the account pin against argument passed.
+            /// </summary>
+            /// <param name="pinEntered"></param>
+            /// <returns>True if thye match, false if they do not.</returns>
             public Boolean checkPin(int pinEntered)
             {
                 if (pinEntered == pin)
@@ -169,6 +168,13 @@ namespace ConsoleApplication3
          * Check if account details and PIN are valid and match.
          * Shows error message if invalid.
          */
+
+        /// <summary>
+        /// Check if accont details and PIN are valid and match.
+        /// Shows error message if invalid.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSubmit_Click_1(object sender, EventArgs e)
         {
             int i, j;
@@ -197,28 +203,29 @@ namespace ConsoleApplication3
                 MessageBox.Show("Please only use numbers for account number and PIN.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        /*
-         * Creation of a new thread to handle separate ATMs
-         */
+        /// <summary>
+        /// Create a new thread to handle separate ATMs.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnNewATM_Click_1(object sender, EventArgs e)
         {
             Thread threadATM = new Thread(new ThreadStart(newFormATM));
             threadATM.Start();
         }
 
-        /*
-         * Creation of a new form for the newly made thread
-         */
+        /// <summary>
+        /// Create a new form for the newly made thread.
+        /// </summary>
         private void newFormATM()
         {
             WelcomeScreen newATMForm = new WelcomeScreen(); // stores instance of new ATM form
             newATMForm.ShowDialog();
         }
 
-        /*
-         * Menu display after account num and PIN are valid - shows balance
-         * and other relevant details and option to withdraw cash and logout
-         */
+        /// <summary>
+        /// Menu display after account num and PIN are valid - shows balance and other relevant details and option to withdraw cash and logout.
+        /// </summary>
         private void accountMenu()
         {
             clearForm();
@@ -255,9 +262,11 @@ namespace ConsoleApplication3
             Controls.Add(btnLogout);
         }
 
-        /* 
-         * Logout of account menu and return to main menu
-         */
+        /// <summary>
+        /// Logout of account menu and return to main menu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLogout_Click(object sender, EventArgs e)
         {
             clearForm();
@@ -405,11 +414,10 @@ namespace ConsoleApplication3
 
         }
 
-        /* 
-         * Clears the form, allowing for switching between screens
-         * (Kayee: This function has been taken and reused from previous assignment
-         * being the Grid Game)
-         */
+        /// <summary>
+        /// Clears the form, allowing for switching between screens.
+        /// (Kayee: This function has been taken and reused from the grid game assignment.)
+        /// </summary>
         private void clearForm()
         {
             // Remove all buttons.
