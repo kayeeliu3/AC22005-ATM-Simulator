@@ -246,6 +246,7 @@ namespace ConsoleApplication3
 
             btnWithdraw.Click += new EventHandler(this.btnWithdraw_Click);
             btnLogout.Click += new EventHandler(this.btnLogout_Click);
+            btnCheckBalance.Click += new EventHandler(this.btnCheckBalance_Click);
             Controls.Add(lblAccountName);
             Controls.Add(lblAccountNum);
             Controls.Add(lblBalance);
@@ -260,13 +261,43 @@ namespace ConsoleApplication3
         private void btnLogout_Click(object sender, EventArgs e)
         {
             clearForm();
+            btnNewATM.Visible = false;
             this.BackgroundImage = Properties.Resources.End;
             //initMenu();
         }
 
         private void btnWithdraw_Click(object sender, EventArgs e)
         {
-            // insert code for withdrawing (critical code?)
+            clearForm();
+            btnNewATM.Visible = false;
+            this.BackgroundImage = Properties.Resources.Cash;
+        }
+
+        private void btnCheckBalance_Click(object sender, EventArgs e) 
+        { 
+            clearForm();
+            this.BackgroundImage = Properties.Resources.Balance;
+            Label lblAccountName = new Label();
+            Label lblBalance = new Label();
+            Button btnLogout = new Button();
+            Button btnMenu = new Button();
+
+
+            lblAccountName.SetBounds(this.ClientSize.Width / 2 - 5, this.ClientSize.Height / 2 - 70, 100, 50);
+            lblBalance.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 + 60, 50, 25);
+            btnLogout.SetBounds(this.ClientSize.Width / 2 + 90, this.ClientSize.Height / 2 + 120, 70, 40);
+            btnMenu.SetBounds(this.ClientSize.Width / 2 - 150, this.ClientSize.Height / 2 + 120, 150, 40);
+            lblAccountName.Text = activeAccount.getName();
+            lblAccountName.TextAlign = ContentAlignment.MiddleCenter;
+            lblBalance.TextAlign = ContentAlignment.MiddleCenter;
+            lblBalance.Text = activeAccount.getBalance().ToString();
+            btnLogout.Text = "Logout";
+            btnMenu.Text = "Return to main menu";
+
+            Controls.Add(lblAccountName);
+            Controls.Add(lblBalance);
+            Controls.Add(btnLogout);
+            Controls.Add(btnMenu);
         }
 
         /* 

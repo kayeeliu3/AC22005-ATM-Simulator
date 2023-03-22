@@ -63,6 +63,16 @@ namespace ConsoleApplication3.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Balance {
+            get {
+                object obj = ResourceManager.GetObject("Balance", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Cash {
             get {
                 object obj = ResourceManager.GetObject("Cash", resourceCulture);
@@ -73,9 +83,29 @@ namespace ConsoleApplication3.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Complete {
+            get {
+                object obj = ResourceManager.GetObject("Complete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap End {
             get {
                 object obj = ResourceManager.GetObject("End", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap InsufficientFunds {
+            get {
+                object obj = ResourceManager.GetObject("InsufficientFunds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
