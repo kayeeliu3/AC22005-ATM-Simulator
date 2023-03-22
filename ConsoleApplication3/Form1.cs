@@ -293,11 +293,19 @@ namespace ConsoleApplication3
             lblBalance.Text = activeAccount.getBalance().ToString();
             btnLogout.Text = "Logout";
             btnMenu.Text = "Return to main menu";
+            btnLogout.Click += new EventHandler(this.btnLogout_Click);
+            btnMenu.Click += new EventHandler(this.btnMenu_Click);
 
             Controls.Add(lblAccountName);
             Controls.Add(lblBalance);
             Controls.Add(btnLogout);
             Controls.Add(btnMenu);
+        }
+
+        private void btnMenu_Click(object sender, EventArgs e)
+        {
+            accountMenu();
+
         }
 
         /* 
