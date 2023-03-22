@@ -1,6 +1,6 @@
 ﻿namespace ConsoleApplication3
 {
-    partial class Form1
+    partial class WelcomeScreen
     {
         /// <summary>
         /// Required designer variable.

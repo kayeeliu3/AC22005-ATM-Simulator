@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace ConsoleApplication3
 {
-    public partial class Form1 : Form
+    public partial class WelcomeScreen : Form
     {
         /*
         * Class Bank containing array of account objects
@@ -139,7 +139,7 @@ namespace ConsoleApplication3
         //TextBox tbPin = new TextBox(); // stores PIN text
         //TextBox tbAccName = new TextBox(); // stores name of the account holder
 
-        public Form1()
+        public WelcomeScreen()
         {
             InitializeComponent();
             initMenu();
@@ -210,7 +210,7 @@ namespace ConsoleApplication3
          */
         private void newFormATM()
         {
-            Form1 newATMForm = new Form1(); // stores instance of new ATM form
+            WelcomeScreen newATMForm = new WelcomeScreen(); // stores instance of new ATM form
             newATMForm.ShowDialog();
         }
 
