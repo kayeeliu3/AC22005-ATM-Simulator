@@ -28,9 +28,9 @@ namespace ConsoleApplication3
              */
             public Bank()
             {
-                ac[0] = new Account(300, 1111, 111111);
-                ac[1] = new Account(750, 2222, 222222);
-                ac[2] = new Account(3000, 3333, 333333);
+                ac[0] = new Account(300, 1111, 111111, "Ananya");
+                ac[1] = new Account(750, 2222, 222222, "Josh");
+                ac[2] = new Account(3000, 3333, 333333, "Kae");
             }
 
             /*
@@ -60,15 +60,15 @@ namespace ConsoleApplication3
             private int balance;
             private int pin;
             private int accountNum;
-            //private string accountName;
+            private string accountName;
 
             //constructor taking initial values for each attribute
-            public Account(int balance, int pin, int accountNum)
+            public Account(int balance, int pin, int accountNum, string accountName)
             {
                 this.balance = balance;
                 this.pin = pin;
                 this.accountNum = accountNum;
-                //this.accountName = accountName;
+                this.accountName = accountName;
             }
 
             //getter and setter functions for balance
@@ -79,6 +79,11 @@ namespace ConsoleApplication3
             public void setBalance(int newBalance)
             {
                 this.balance = newBalance;
+            }
+
+            public string getName()
+            {
+                return accountName;
             }
 
             /*
@@ -176,6 +181,7 @@ namespace ConsoleApplication3
                         if (activeAccount.checkPin(j))
                         {
                             accountMenu();
+                            btnNewATM.Visible = false;
                         }
                         else
                             MessageBox.Show("Wrong PIN.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -216,25 +222,35 @@ namespace ConsoleApplication3
         {
             clearForm();
             this.BackgroundImage = Properties.Resources.Options;
+            Label lblAccountName = new Label();
             Label lblAccountNum = new Label();
             Label lblBalance = new Label();
             Button btnWithdraw = new Button();
+            Button btnCheckBalance = new Button();
             Button btnLogout = new Button();
 
-            lblAccountNum.SetBounds(this.ClientSize.Width / 2 - 250, this.ClientSize.Height / 2 - 150, 150, 25);
-            lblBalance.SetBounds(this.ClientSize.Width / 2 - 250, this.ClientSize.Height / 2 - 125, 150, 25);
-            btnWithdraw.SetBounds(this.ClientSize.Width / 2 - 50, this.ClientSize.Height / 2 - 50, 100, 50);
-            btnLogout.SetBounds(this.ClientSize.Width / 2 - 50, this.ClientSize.Height / 2, 100, 50);
+            lblAccountName.SetBounds(this.ClientSize.Width / 2 - 5, this.ClientSize.Height / 2 - 110, 100, 50);
+            //lblAccountNum.SetBounds(this.ClientSize.Width / 2 - 250, this.ClientSize.Height / 2 - 150, 150, 25);
+            //lblBalance.SetBounds(this.ClientSize.Width / 2 - 250, this.ClientSize.Height / 2 - 125, 150, 25);
+            btnWithdraw.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 - 30, 40, 40);
+            btnCheckBalance.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 + 10, 40, 40);
+            btnLogout.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 + 50, 40, 40);
+            lblAccountName.Text = activeAccount.getName();
+            lblAccountName.TextAlign = ContentAlignment.MiddleCenter;
+            //lblAccountName.BackgroundImage = Properties.Resources.Options; 
             lblBalance.Text = "Balance: " + activeAccount.getBalance();
-            lblAccountNum.Text = "Account Num: " + activeAccount.getAccountNum();
-            btnWithdraw.Text = "Withdraw";
-            btnLogout.Text = "Logout";
+            //lblAccountNum.Text = "Account Num: " + activeAccount.getAccountNum();
+            btnWithdraw.Text = "1";
+            btnCheckBalance.Text = "2";
+            btnLogout.Text = "3";
 
             btnWithdraw.Click += new EventHandler(this.btnWithdraw_Click);
             btnLogout.Click += new EventHandler(this.btnLogout_Click);
+            Controls.Add(lblAccountName);
             Controls.Add(lblAccountNum);
             Controls.Add(lblBalance);
             Controls.Add(btnWithdraw);
+            Controls.Add(btnCheckBalance);
             Controls.Add(btnLogout);
         }
 
