@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -271,6 +272,74 @@ namespace ConsoleApplication3
             clearForm();
             btnNewATM.Visible = false;
             this.BackgroundImage = Properties.Resources.Cash;
+
+            Button[] btnAmounts = new Button[5];
+            Button btnCustomAmount = new Button();
+
+            // Currently the ordering of the following code is a tad odd - a bug occured with timing due to event handler having to run AFTER
+            // the text has been set - will try to fix later if possible! (Kae)
+
+            for (int i = 0; i < btnAmounts.Length; i++)
+                btnAmounts[i] = new Button();
+            
+            btnAmounts[0].Text = "£10";
+            btnAmounts[1].Text = "£20";
+            btnAmounts[2].Text = "£40";
+            btnAmounts[3].Text = "£100";
+            btnAmounts[4].Text = "£500";
+
+            for (int i = 0; i < btnAmounts.Length; i++)
+            {
+                int tempText;
+                btnAmounts[i].SetBounds(this.ClientSize.Width / 2 - 225 + (i * 100), this.ClientSize.Height / 2 + 75, 50, 50);
+            }
+            btnAmounts[0].Click += new EventHandler((s, ev) => btnWithdrawAmount_Click(s, ev, btnAmounts[0].Text));
+            btnAmounts[1].Click += new EventHandler((s, ev) => btnWithdrawAmount_Click(s, ev, btnAmounts[1].Text));
+            btnAmounts[2].Click += new EventHandler((s, ev) => btnWithdrawAmount_Click(s, ev, btnAmounts[2].Text));
+            btnAmounts[3].Click += new EventHandler((s, ev) => btnWithdrawAmount_Click(s, ev, btnAmounts[3].Text));
+            btnAmounts[4].Click += new EventHandler((s, ev) => btnWithdrawAmount_Click(s, ev, btnAmounts[4].Text));
+
+            btnCustomAmount.SetBounds(this.ClientSize.Width / 2 - 40, this.ClientSize.Height / 2 + 125, 75, 50);
+            btnCustomAmount.Click += new EventHandler((s, ev) => btnWithdrawAmount_Click(s, ev, ""));
+            btnCustomAmount.Text = "Custom Amount";
+
+            foreach (var btn in btnAmounts)
+            {
+                Controls.Add(btn);
+            }
+            Controls.Add(btnCustomAmount);
+        }
+
+        /*
+         * Withdraw a certain amount and take this away from the account balance
+         */
+        private void btnWithdrawAmount_Click(object s, EventArgs e, string amount)
+        {
+            if (amount == "")
+                customAmountMenu();
+
+            amount = amount.Substring(1);
+
+            if (!activeAccount.decrementBalance(Int32.Parse(amount)))
+            {
+                MessageBox.Show("Insufficient funds.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show("Transaction success!");
+                accountMenu();
+            }
+        }
+
+
+        private void customAmountMenu()
+        {
+            Label lblInstructions = new Label();
+            lblInstructions.Text = "Please enter an amount divisible by £5.";
+
+            //Insert code
+
+            clearForm();
         }
 
         private void btnCheckBalance_Click(object sender, EventArgs e) 
@@ -281,7 +350,6 @@ namespace ConsoleApplication3
             Label lblBalance = new Label();
             Button btnLogout = new Button();
             Button btnMenu = new Button();
-
 
             lblAccountName.SetBounds(this.ClientSize.Width / 2 - 5, this.ClientSize.Height / 2 - 70, 100, 50);
             lblBalance.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 + 60, 50, 25);
