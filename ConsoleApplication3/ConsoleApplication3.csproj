@@ -98,6 +98,7 @@
     <Content Include="Resources\Balance.png" />
     <Content Include="Resources\Cash.png" />
     <Content Include="Resources\Complete.png" />
+    <Content Include="Resources\CustomWithdraw.png" />
     <Content Include="Resources\End.png" />
     <Content Include="Resources\InsufficientFunds.png" />
   </ItemGroup>
