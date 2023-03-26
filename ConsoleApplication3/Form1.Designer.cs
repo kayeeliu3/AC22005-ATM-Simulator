@@ -50,7 +50,7 @@
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(136, 467);
+            this.btnSubmit.Location = new System.Drawing.Point(546, 476);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(235, 53);
             this.btnSubmit.TabIndex = 2;
@@ -61,15 +61,15 @@
             // btnNewATM
             // 
             this.btnNewATM.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.btnNewATM.Location = new System.Drawing.Point(531, 467);
+            this.btnNewATM.Location = new System.Drawing.Point(133, 476);
             this.btnNewATM.Name = "btnNewATM";
             this.btnNewATM.Size = new System.Drawing.Size(226, 53);
             this.btnNewATM.TabIndex = 3;
-            this.btnNewATM.Text = "New ATM Account";
+            this.btnNewATM.Text = "New ATM Screen";
             this.btnNewATM.UseVisualStyleBackColor = true;
             this.btnNewATM.Click += new System.EventHandler(this.btnNewATM_Click_1);
             // 
-            // Form1
+            // WelcomeScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -83,7 +83,7 @@
             this.Controls.Add(this.tbAccNum);
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "Form1";
+            this.Name = "WelcomeScreen";
             this.Text = "ATM";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
