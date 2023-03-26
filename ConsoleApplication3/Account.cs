@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ConsoleApplication3
@@ -12,10 +13,12 @@ namespace ConsoleApplication3
     internal class Account
     {
         // Attributes for account.
+        private static Semaphore _pool = new Semaphore(1, 1);
         public int balance { get; private set; }
         private int pin;
         public int accountNum { get; private set; }
         public string name { get; }
+        public bool useSemaphore { get; set; }
 
         /// <summary>
         /// Construct new bank account
@@ -39,9 +42,17 @@ namespace ConsoleApplication3
         /// <returns>True if successful, false if insufficient funds in account.</returns>
         public Boolean decrementBalance(int amount)
         {
+            if (useSemaphore)
+            { 
+                _pool.WaitOne();
+            }
             if (this.balance > amount)
             {
                 balance -= amount;
+                if (useSemaphore)
+                {
+                    _pool.Release();
+                }
                 return true;
             }
             else
