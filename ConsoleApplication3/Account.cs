@@ -64,11 +64,11 @@ namespace ConsoleApplication3
         /// <summary>
         /// Check the account pin against argument passed.
         /// </summary>
-        /// <param name="pinEntered"></param>
-        /// <returns>True if thye match, false if they do not.</returns>
-        public Boolean checkPin(int pinEntered)
+        /// <param name="pin"></param>
+        /// <returns>True if they match, false if they do not.</returns>
+        public Boolean checkPin(int pin)
         {
-            return pinEntered == pin;
+            return pin == this.pin;
         }
     }
 }

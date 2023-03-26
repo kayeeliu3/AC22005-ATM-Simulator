@@ -17,7 +17,7 @@ namespace GridGame
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new WelcomeScreen());
+            Application.Run(new ATMForm());
         }
     }
 }

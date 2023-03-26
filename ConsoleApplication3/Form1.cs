@@ -16,36 +16,36 @@ using System.Windows.Forms;
 
 namespace ConsoleApplication3
 {
-    public partial class WelcomeScreen : Form
+    public partial class ATMForm : Form
     {
         /// <summary>
         /// Bank class containing array of account objects.
         /// </summary>
         class Bank
         {
-            private Account[] ac = new Account[3];
+            private Account[] Accounts = new Account[3];
 
             /// <summary>
             /// Initialises 3 accounts.
             /// </summary>
             public Bank()
             {
-                ac[0] = new Account(300, 1111, 111111, "Ananya");
-                ac[1] = new Account(750, 2222, 222222, "Josh");
-                ac[2] = new Account(3000, 3333, 333333, "Kae");
+                Accounts[0] = new Account(300, 1111, 111111, "Ananya");
+                Accounts[1] = new Account(750, 2222, 222222, "Josh");
+                Accounts[2] = new Account(3000, 3333, 333333, "Kae");
             }
 
             /// <summary>
             /// Check if account number exists in Bank.
             /// </summary>
-            /// <param name="accNumEntered">Account number to check.</param>
+            /// <param name="accountNumber">Account number to check.</param>
             /// <returns>Returns account object if the account number exists, else returns null.</returns>
-            public Account checkAccExists(int accNumEntered)
+            public Account checkAccountExists(int accountNumber)
             {
-                foreach (Account acc in this.ac)
+                foreach (Account Account in this.Accounts)
                 {
-                    if (acc.accountNum == accNumEntered)
-                        return acc;
+                    if (Account.accountNum == accountNumber)
+                        return Account;
                 }
 
                 return null;
@@ -57,7 +57,7 @@ namespace ConsoleApplication3
         Account activeAccount; // stores active account details
         string transactionLog = @"../../transaction_log.txt"; //text file containing transaction log
 
-        public WelcomeScreen()
+        public ATMForm()
         {
             //create new empty transaction log
             if (File.Exists(transactionLog))
@@ -74,7 +74,7 @@ namespace ConsoleApplication3
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnSubmit_Click_1(object sender, EventArgs e)
+        private void btnSubmit_Click(object sender, EventArgs e)
         {
             int i, j;
             if (!int.TryParse(tbAccNum.Text, out i)
@@ -84,7 +84,7 @@ namespace ConsoleApplication3
                 return;
             }
 
-            activeAccount = bank.checkAccExists(i);
+            activeAccount = bank.checkAccountExists(i);
             if (activeAccount == null)
             {
                 MessageBox.Show("Account number not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -105,7 +105,7 @@ namespace ConsoleApplication3
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnNewATM_Click_1(object sender, EventArgs e)
+        private void btnNewATM_Click(object sender, EventArgs e)
         {
             Thread threadATM = new Thread(new ThreadStart(newFormATM));
             threadATM.Start();
@@ -116,7 +116,7 @@ namespace ConsoleApplication3
         /// </summary>
         private void newFormATM()
         {
-            WelcomeScreen newATMForm = new WelcomeScreen(); // stores instance of new ATM form
+            ATMForm newATMForm = new ATMForm(); // stores instance of new ATM form
             newATMForm.ShowDialog();
         }
 
@@ -126,7 +126,7 @@ namespace ConsoleApplication3
         private void accountMenu()
         {
             clearForm();
-            this.BackgroundImage = Properties.Resources.Options;
+            this.BackgroundImage = Properties.Resources.AccountMenu;
             Label lblAccountName = new Label();
             Label lblAccountNum = new Label();
             Label lblBalance = new Label();
@@ -143,7 +143,6 @@ namespace ConsoleApplication3
             btnLog.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 + 120, 80, 40);
             lblAccountName.Text = activeAccount.name;
             lblAccountName.TextAlign = ContentAlignment.MiddleCenter;
-            //lblAccountName.BackgroundImage = Properties.Resources.Options; 
             lblBalance.Text = "Balance: " + activeAccount.balance;
             btnLog.Text = "Transaction Log";
             btnWithdraw.Text = "1";
@@ -206,7 +205,6 @@ namespace ConsoleApplication3
 
             for (int i = 0; i < btnAmounts.Length; i++)
             {
-                int tempText;
                 btnAmounts[i].SetBounds(this.ClientSize.Width / 2 - 225 + (i * 100), this.ClientSize.Height / 2 + 25, 50, 50);
             }
             btnAmounts[0].Click += new EventHandler((s, ev) => btnWithdrawAmount_Click(s, ev, btnAmounts[0].Text));
@@ -374,6 +372,5 @@ namespace ConsoleApplication3
                 Controls.Remove(image);
             }
         }
-
     }
 }

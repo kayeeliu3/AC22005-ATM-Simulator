@@ -1,6 +1,6 @@
 ﻿namespace ConsoleApplication3
 {
-    partial class WelcomeScreen
+    partial class ATMForm
     {
         /// <summary>
         /// Required designer variable.
@@ -56,7 +56,7 @@
             this.btnSubmit.TabIndex = 2;
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.UseVisualStyleBackColor = true;
-            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click_1);
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // btnNewATM
             // 
@@ -67,14 +67,14 @@
             this.btnNewATM.TabIndex = 3;
             this.btnNewATM.Text = "New ATM Screen";
             this.btnNewATM.UseVisualStyleBackColor = true;
-            this.btnNewATM.Click += new System.EventHandler(this.btnNewATM_Click_1);
+            this.btnNewATM.Click += new System.EventHandler(this.btnNewATM_Click);
             // 
-            // WelcomeScreen
+            // ATMForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.BackgroundImage = global::ConsoleApplication3.Properties.Resources.MainMenu;
+            this.BackgroundImage = global::ConsoleApplication3.Properties.Resources.Login;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(900, 562);
             this.Controls.Add(this.btnNewATM);
@@ -83,7 +83,7 @@
             this.Controls.Add(this.tbAccNum);
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "WelcomeScreen";
+            this.Name = "ATMForm";
             this.Text = "ATM";
             this.ResumeLayout(false);
             this.PerformLayout();
