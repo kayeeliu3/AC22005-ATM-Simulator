@@ -46,7 +46,7 @@ namespace ConsoleApplication3
             { 
                 _pool.WaitOne();
             }
-            if (this.balance > amount)
+            if (this.balance >= amount)
             {
                 balance -= amount;
                 if (useSemaphore)
