@@ -43,7 +43,7 @@ namespace ConsoleApplication3
             {
                 foreach (Account acc in this.ac)
                 {
-                    if (acc.getAccountNum() == accNumEntered)
+                    if (acc.accountNum == accNumEntered)
                         return acc;
                 }
 
@@ -51,117 +51,18 @@ namespace ConsoleApplication3
             }
         }
 
-        /// <summary>
-        /// Encapsulates all features of a simple bank account.
-        /// </summary>
-        class Account
-        {
-            // Attributes for account.
-            private int balance;
-            private int pin;
-            private int accountNum;
-            private string accountName;
-
-            /// <summary>
-            /// Construct new bank account
-            /// </summary>
-            /// <param name="balance">Initial balance of the bank account.</param>
-            /// <param name="pin">Pin of the bank account.</param>
-            /// <param name="accountNum">Account number of the bank account.</param>
-            /// <param name="accountName">Name of the bank account owner.</param>
-            public Account(int balance, int pin, int accountNum, string accountName)
-            {
-                this.balance = balance;
-                this.pin = pin;
-                this.accountNum = accountNum;
-                this.accountName = accountName;
-            }
-
-            // Getter and setter functions for balance.
-            public int getBalance()
-            {
-                return balance;
-            }
-            public void setBalance(int newBalance)
-            {
-                this.balance = newBalance;
-            }
-
-            public string getName()
-            {
-                return accountName;
-            }
-
-            /// <summary>
-            /// Decrements balance of an account.
-            /// </summary>
-            /// <param name="amount">Amount to deduct.</param>
-            /// <returns>True if successful, false if insufficient funds in account.</returns>
-            public Boolean decrementBalance(int amount)
-            {
-                if (this.balance > amount)
-                {
-                    balance -= amount;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-
-            /// <summary>
-            /// Check the account pin against argument passed.
-            /// </summary>
-            /// <param name="pinEntered"></param>
-            /// <returns>True if thye match, false if they do not.</returns>
-            public Boolean checkPin(int pinEntered)
-            {
-                if (pinEntered == pin)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            public int getAccountNum()
-            {
-                return accountNum;
-            }
-        }
 
         Bank bank = new Bank(); // generic bank instance
         Account activeAccount; // stores active account details
 
-        //TextBox tbAccNum = new TextBox(); // stores account number text
-        //TextBox tbPin = new TextBox(); // stores PIN text
-        //TextBox tbAccName = new TextBox(); // stores name of the account holder
-
         public WelcomeScreen()
         {
             InitializeComponent();
-            initMenu();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
-        }
-
-        /*
-         * Display main menu for Bank system
-         */
-        private void initMenu()
-        {
-            //Button btnSubmit = new Button();
-            //Button btnNewATM = new Button();
-
-            //Controls.Add(tbAccNum);
-            //Controls.Add(tbPin);
-            //Controls.Add(btnSubmit);
-            //Controls.Add(btnNewATM);
         }
 
         /*
@@ -178,29 +79,27 @@ namespace ConsoleApplication3
         private void btnSubmit_Click_1(object sender, EventArgs e)
         {
             int i, j;
-            if (int.TryParse(tbAccNum.Text, out i))
+            if (!int.TryParse(tbAccNum.Text, out i)
+                || !int.TryParse(tbPin.Text, out j))
             {
-                if (int.TryParse(tbPin.Text, out j))
-                {
-                    activeAccount = bank.checkAccExists(i);
-                    if (activeAccount != null)
-                    {
-                        if (activeAccount.checkPin(j))
-                        {
-                            accountMenu();
-                            btnNewATM.Visible = false;
-                        }
-                        else
-                            MessageBox.Show("Wrong PIN.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else
-                        MessageBox.Show("Account number not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                    MessageBox.Show("Please only use numbers for account number and PIN.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
                 MessageBox.Show("Please only use numbers for account number and PIN.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            activeAccount = bank.checkAccExists(i);
+            if (activeAccount == null)
+            {
+                MessageBox.Show("Account number not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!activeAccount.checkPin(j))
+            {
+                MessageBox.Show("Wrong PIN.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            accountMenu();
+            btnNewATM.Visible = false;
         }
 
         /// <summary>
@@ -242,10 +141,10 @@ namespace ConsoleApplication3
             btnWithdraw.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 - 30, 40, 40);
             btnCheckBalance.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 + 10, 40, 40);
             btnLogout.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 + 50, 40, 40);
-            lblAccountName.Text = activeAccount.getName();
+            lblAccountName.Text = activeAccount.name;
             lblAccountName.TextAlign = ContentAlignment.MiddleCenter;
             //lblAccountName.BackgroundImage = Properties.Resources.Options; 
-            lblBalance.Text = "Balance: " + activeAccount.getBalance();
+            lblBalance.Text = "Balance: " + activeAccount.balance;
             //lblAccountNum.Text = "Account Num: " + activeAccount.getAccountNum();
             btnWithdraw.Text = "1";
             btnCheckBalance.Text = "2";
@@ -393,10 +292,10 @@ namespace ConsoleApplication3
             lblBalance.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 + 60, 50, 25);
             btnLogout.SetBounds(this.ClientSize.Width / 2 + 90, this.ClientSize.Height / 2 + 120, 70, 40);
             btnMenu.SetBounds(this.ClientSize.Width / 2 - 150, this.ClientSize.Height / 2 + 120, 150, 40);
-            lblAccountName.Text = activeAccount.getName();
+            lblAccountName.Text = activeAccount.name;
             lblAccountName.TextAlign = ContentAlignment.MiddleCenter;
             lblBalance.TextAlign = ContentAlignment.MiddleCenter;
-            lblBalance.Text = activeAccount.getBalance().ToString();
+            lblBalance.Text = activeAccount.balance.ToString();
             btnLogout.Text = "Logout";
             btnMenu.Text = "Return to main menu";
             btnLogout.Click += new EventHandler(this.btnLogout_Click);
