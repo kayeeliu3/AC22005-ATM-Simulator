@@ -60,16 +60,6 @@ namespace ConsoleApplication3
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        /*
-         * Check if account details and PIN are valid and match.
-         * Shows error message if invalid.
-         */
-
         /// <summary>
         /// Check if accont details and PIN are valid and match.
         /// Shows error message if invalid.
