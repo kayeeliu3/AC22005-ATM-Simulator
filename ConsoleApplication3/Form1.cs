@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -54,9 +55,16 @@ namespace ConsoleApplication3
 
         Bank bank = new Bank(); // generic bank instance
         Account activeAccount; // stores active account details
+        string transactionLog = @"../../transaction_log.txt"; //text file containing transaction log
 
         public WelcomeScreen()
         {
+            //create new empty transaction log
+            if (File.Exists(transactionLog))
+            {
+                File.Delete(transactionLog);
+            }
+            File.Create(transactionLog);
             InitializeComponent();
         }
 
@@ -125,17 +133,19 @@ namespace ConsoleApplication3
             Button btnWithdraw = new Button();
             Button btnCheckBalance = new Button();
             Button btnLogout = new Button();
+            Button btnLog = new Button();
 
 
             lblAccountName.SetBounds(this.ClientSize.Width / 2 - 5, this.ClientSize.Height / 2 - 110, 100, 50);
             btnWithdraw.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 - 30, 40, 40);
             btnCheckBalance.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 + 10, 40, 40);
             btnLogout.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 + 50, 40, 40);
+            btnLog.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 + 120, 80, 40);
             lblAccountName.Text = activeAccount.name;
             lblAccountName.TextAlign = ContentAlignment.MiddleCenter;
             //lblAccountName.BackgroundImage = Properties.Resources.Options; 
             lblBalance.Text = "Balance: " + activeAccount.balance;
-            //lblAccountNum.Text = "Account Num: " + activeAccount.getAccountNum();
+            btnLog.Text = "Transaction Log";
             btnWithdraw.Text = "1";
             btnCheckBalance.Text = "2";
             btnLogout.Text = "3";
@@ -143,12 +153,23 @@ namespace ConsoleApplication3
             btnWithdraw.Click += new EventHandler(this.btnWithdraw_Click);
             btnLogout.Click += new EventHandler(this.btnLogout_Click);
             btnCheckBalance.Click += new EventHandler(this.btnCheckBalance_Click);
+            btnLog.Click += new EventHandler(this.btnLog_Click);
+
             Controls.Add(lblAccountName);
             Controls.Add(lblAccountNum);
             Controls.Add(lblBalance);
             Controls.Add(btnWithdraw);
             Controls.Add(btnCheckBalance);
             Controls.Add(btnLogout);
+            Controls.Add(btnLog);
+        }
+
+        /// <summary>
+        /// Opens up transaction log for the active account.
+        /// </summary>
+        private void btnLog_Click(object sender, EventArgs e)
+        {
+            Process.Start("notepad.exe", transactionLog);
         }
 
         /// <summary>
@@ -174,9 +195,6 @@ namespace ConsoleApplication3
             Button btnCustomAmount = new Button();
             Button btnMenu = new Button();
 
-            // Currently the ordering of the following code is a tad odd - a bug occured with timing due to event handler having to run AFTER
-            // the text has been set - will try to fix later if possible! (Kae)
-
             for (int i = 0; i < btnAmounts.Length; i++)
                 btnAmounts[i] = new Button();
             
@@ -201,10 +219,8 @@ namespace ConsoleApplication3
             btnMenu.SetBounds(this.ClientSize.Width / 2 - 200, this.ClientSize.Height / 2 + 120, 100, 50);
             btnMenu.Click += new EventHandler(this.btnMenu_Click);
             btnMenu.Text = "Return to main menu";
-            //btnCustomAmount.Click += new EventHandler((s, ev) => btnWithdrawAmount_Click(s, ev, ""));
             btnCustomAmount.Click += new EventHandler(this.btnCustomAmount_Click);
             btnCustomAmount.Text = "Custom Amount";
-
 
             foreach (var btn in btnAmounts)
             {
@@ -219,9 +235,6 @@ namespace ConsoleApplication3
          */
         private void btnWithdrawAmount_Click(object s, EventArgs e, string amount)
         {
-            if (amount == "")
-                customAmountMenu();
-
             amount = amount.Substring(1);
 
             if (!activeAccount.decrementBalance(Int32.Parse(amount)))
@@ -231,6 +244,7 @@ namespace ConsoleApplication3
             else
             {
                 MessageBox.Show("Transaction success!");
+                logTransaction(Int32.Parse(amount));
                 accountMenu();
             }
         }
@@ -243,30 +257,44 @@ namespace ConsoleApplication3
             TextBox tbAmount = new TextBox();
             Button btnGoBack = new Button();
             Button btnWithdrawCustomAmount = new Button();
+            Button btnSubmitCustomAmount = new Button();
 
             tbAmount.SetBounds(this.ClientSize.Width / 2, this.ClientSize.Height / 2 + 40, 200, 600);
             btnGoBack.SetBounds(this.ClientSize.Width / 2 - 150, this.ClientSize.Height / 2 + 120, 80, 40);
+            btnSubmitCustomAmount.SetBounds(this.ClientSize.Width / 2 + 160, this.ClientSize.Height / 2 + 120, 80, 40);
+            btnSubmitCustomAmount.Text = "Submit";
             btnGoBack.Text = "Go Back";
 
             btnGoBack.Click += new EventHandler(this.btnGoBack_Click);
+            btnSubmitCustomAmount.Click += new EventHandler((s, ev) => btnSubmitCustomAmount_Click(s, ev, tbAmount.Text));
 
             Controls.Add(btnGoBack);
             Controls.Add(tbAmount);
+            Controls.Add(btnSubmitCustomAmount);
+        }
+
+        private void btnSubmitCustomAmount_Click(object sender, EventArgs e, string amount)
+        {
+            int parse;
+            if ((!int.TryParse(amount, out parse)) || ((parse % 5) != 0))
+            {
+                MessageBox.Show("Please enter a valid amount.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (!activeAccount.decrementBalance(parse))
+            {
+                MessageBox.Show("Insufficient funds.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show("Transaction success!");
+                logTransaction(parse);
+                accountMenu();
+            }
         }
 
         private void btnGoBack_Click(object sender, EventArgs e)
         {
             btnWithdraw_Click( sender, e);
-        }
-
-        private void customAmountMenu()
-        {
-            Label lblInstructions = new Label();
-            lblInstructions.Text = "Please enter an amount divisible by £5.";
-
-            //Insert code
-
-            clearForm();
         }
 
         private void btnCheckBalance_Click(object sender, EventArgs e) 
@@ -301,6 +329,18 @@ namespace ConsoleApplication3
         {
             accountMenu();
 
+        }
+
+        /// <summary>
+        /// Logs transaction into the transaction_log text file
+        /// Referenced from Microsoft
+        /// </summary>
+        private void logTransaction(int amount)
+        {
+            using (StreamWriter sw = File.AppendText(transactionLog))
+            {
+                sw.WriteLine("Account " + activeAccount.name + " withdrew £" + amount);
+            }
         }
 
         /// <summary>
