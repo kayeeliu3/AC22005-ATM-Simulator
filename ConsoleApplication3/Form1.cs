@@ -230,9 +230,8 @@ namespace ConsoleApplication3
             Button btnCheckBalance = new Button();
             Button btnLogout = new Button();
 
+
             lblAccountName.SetBounds(this.ClientSize.Width / 2 - 5, this.ClientSize.Height / 2 - 110, 100, 50);
-            //lblAccountNum.SetBounds(this.ClientSize.Width / 2 - 250, this.ClientSize.Height / 2 - 150, 150, 25);
-            //lblBalance.SetBounds(this.ClientSize.Width / 2 - 250, this.ClientSize.Height / 2 - 125, 150, 25);
             btnWithdraw.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 - 30, 40, 40);
             btnCheckBalance.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 + 10, 40, 40);
             btnLogout.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 + 50, 40, 40);
@@ -275,6 +274,7 @@ namespace ConsoleApplication3
 
             Button[] btnAmounts = new Button[5];
             Button btnCustomAmount = new Button();
+            Button btnMenu = new Button();
 
             // Currently the ordering of the following code is a tad odd - a bug occured with timing due to event handler having to run AFTER
             // the text has been set - will try to fix later if possible! (Kae)
@@ -291,7 +291,7 @@ namespace ConsoleApplication3
             for (int i = 0; i < btnAmounts.Length; i++)
             {
                 int tempText;
-                btnAmounts[i].SetBounds(this.ClientSize.Width / 2 - 225 + (i * 100), this.ClientSize.Height / 2 + 75, 50, 50);
+                btnAmounts[i].SetBounds(this.ClientSize.Width / 2 - 225 + (i * 100), this.ClientSize.Height / 2 + 25, 50, 50);
             }
             btnAmounts[0].Click += new EventHandler((s, ev) => btnWithdrawAmount_Click(s, ev, btnAmounts[0].Text));
             btnAmounts[1].Click += new EventHandler((s, ev) => btnWithdrawAmount_Click(s, ev, btnAmounts[1].Text));
@@ -299,15 +299,21 @@ namespace ConsoleApplication3
             btnAmounts[3].Click += new EventHandler((s, ev) => btnWithdrawAmount_Click(s, ev, btnAmounts[3].Text));
             btnAmounts[4].Click += new EventHandler((s, ev) => btnWithdrawAmount_Click(s, ev, btnAmounts[4].Text));
 
-            btnCustomAmount.SetBounds(this.ClientSize.Width / 2 - 40, this.ClientSize.Height / 2 + 125, 75, 50);
-            btnCustomAmount.Click += new EventHandler((s, ev) => btnWithdrawAmount_Click(s, ev, ""));
+            btnCustomAmount.SetBounds(this.ClientSize.Width / 2 + 100, this.ClientSize.Height / 2 + 120, 100, 50);
+            btnMenu.SetBounds(this.ClientSize.Width / 2 - 200, this.ClientSize.Height / 2 + 120, 100, 50);
+            btnMenu.Click += new EventHandler(this.btnMenu_Click);
+            btnMenu.Text = "Return to main menu";
+            //btnCustomAmount.Click += new EventHandler((s, ev) => btnWithdrawAmount_Click(s, ev, ""));
+            btnCustomAmount.Click += new EventHandler(this.btnCustomAmount_Click);
             btnCustomAmount.Text = "Custom Amount";
+
 
             foreach (var btn in btnAmounts)
             {
                 Controls.Add(btn);
             }
             Controls.Add(btnCustomAmount);
+            Controls.Add(btnMenu);
         }
 
         /*
@@ -331,6 +337,29 @@ namespace ConsoleApplication3
             }
         }
 
+        private void btnCustomAmount_Click(object sender, EventArgs e)
+        {
+            clearForm();
+            btnNewATM.Visible = false;
+            this.BackgroundImage = Properties.Resources.CustomWithdraw;
+            TextBox tbAmount = new TextBox();
+            Button btnGoBack = new Button();
+            Button btnWithdrawCustomAmount = new Button();
+
+            tbAmount.SetBounds(this.ClientSize.Width / 2, this.ClientSize.Height / 2 + 40, 200, 600);
+            btnGoBack.SetBounds(this.ClientSize.Width / 2 - 150, this.ClientSize.Height / 2 + 120, 80, 40);
+            btnGoBack.Text = "Go Back";
+
+            btnGoBack.Click += new EventHandler(this.btnGoBack_Click);
+
+            Controls.Add(btnGoBack);
+            Controls.Add(tbAmount);
+        }
+
+        private void btnGoBack_Click(object sender, EventArgs e)
+        {
+            btnWithdraw_Click( sender, e);
+        }
 
         private void customAmountMenu()
         {
