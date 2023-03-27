@@ -105,7 +105,7 @@ namespace ConsoleApplication3
             }
 
             accountMenu();
-            btnNewATM.Visible = false;
+            btnSemaphore.Visible = false;
         }
 
         /// <summary>
@@ -142,6 +142,7 @@ namespace ConsoleApplication3
             Button btnCheckBalance = new Button();
             Button btnLogout = new Button();
             Button btnLog = new Button();
+            Button btnNewATM = new Button();
 
 
             lblAccountName.SetBounds(this.ClientSize.Width / 2 - 5, this.ClientSize.Height / 2 - 110, 100, 50);
@@ -149,10 +150,12 @@ namespace ConsoleApplication3
             btnCheckBalance.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 + 10, 40, 40);
             btnLogout.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 + 50, 40, 40);
             btnLog.SetBounds(this.ClientSize.Width / 2 + 150, this.ClientSize.Height / 2 + 120, 80, 40);
+            btnNewATM.SetBounds(130, this.ClientSize.Height / 2 + 120, 100, 40);
             lblAccountName.Text = activeAccount.name;
             lblAccountName.TextAlign = ContentAlignment.MiddleCenter;
             lblBalance.Text = "Balance: " + activeAccount.balance;
             btnLog.Text = "Transaction Log";
+            btnNewATM.Text = "New ATM Screen";
             btnWithdraw.Text = "1";
             btnCheckBalance.Text = "2";
             btnLogout.Text = "3";
@@ -161,6 +164,7 @@ namespace ConsoleApplication3
             btnLogout.Click += new EventHandler(this.btnLogout_Click);
             btnCheckBalance.Click += new EventHandler(this.btnCheckBalance_Click);
             btnLog.Click += new EventHandler(this.btnLog_Click);
+            btnNewATM.Click += new EventHandler(this.btnNewATM_Click);
 
             Controls.Add(lblAccountName);
             Controls.Add(lblAccountNum);
@@ -169,6 +173,7 @@ namespace ConsoleApplication3
             Controls.Add(btnCheckBalance);
             Controls.Add(btnLogout);
             Controls.Add(btnLog);
+            Controls.Add(btnNewATM);
         }
 
         /// <summary>
@@ -187,7 +192,7 @@ namespace ConsoleApplication3
         private void btnLogout_Click(object sender, EventArgs e)
         {
             Controls.Clear();
-            btnNewATM.Visible = false;
+            btnSemaphore.Visible = false;
             this.BackgroundImage = Properties.Resources.End;
             //initMenu();
         }
@@ -195,7 +200,7 @@ namespace ConsoleApplication3
         private void btnWithdraw_Click(object sender, EventArgs e)
         {
             Controls.Clear();
-            btnNewATM.Visible = false;
+            btnSemaphore.Visible = false;
             this.BackgroundImage = Properties.Resources.Cash;
 
             Button[] btnAmounts = new Button[5];
@@ -258,7 +263,7 @@ namespace ConsoleApplication3
         private void btnCustomAmount_Click(object sender, EventArgs e)
         {
             Controls.Clear();
-            btnNewATM.Visible = false;
+            btnSemaphore.Visible = false;
             this.BackgroundImage = Properties.Resources.CustomWithdraw;
             TextBox tbAmount = new TextBox();
             Button btnGoBack = new Button();
@@ -347,6 +352,11 @@ namespace ConsoleApplication3
             {
                 sw.WriteLine("Account " + activeAccount.name + " withdrew £" + amount);
             }
+        }
+
+        private void ATMForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -31,7 +31,7 @@
             this.tbAccNum = new System.Windows.Forms.TextBox();
             this.tbPin = new System.Windows.Forms.TextBox();
             this.btnSubmit = new System.Windows.Forms.Button();
-            this.btnNewATM = new System.Windows.Forms.Button();
+            this.btnSemaphore = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbAccNum
@@ -58,16 +58,16 @@
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
-            // btnNewATM
+            // btnSemaphore
             // 
-            this.btnNewATM.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.btnNewATM.Location = new System.Drawing.Point(133, 476);
-            this.btnNewATM.Name = "btnNewATM";
-            this.btnNewATM.Size = new System.Drawing.Size(226, 53);
-            this.btnNewATM.TabIndex = 3;
-            this.btnNewATM.Text = "New ATM Screen";
-            this.btnNewATM.UseVisualStyleBackColor = true;
-            this.btnNewATM.Click += new System.EventHandler(this.btnNewATM_Click);
+            this.btnSemaphore.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.btnSemaphore.Location = new System.Drawing.Point(133, 476);
+            this.btnSemaphore.Name = "btnSemaphore";
+            this.btnSemaphore.Size = new System.Drawing.Size(226, 53);
+            this.btnSemaphore.TabIndex = 3;
+            this.btnSemaphore.Text = "Semaphore";
+            this.btnSemaphore.UseVisualStyleBackColor = true;
+            //this.btnSemaphore.Click += new System.EventHandler(this.btnNewATM_Click);
             // 
             // ATMForm
             // 
@@ -77,7 +77,7 @@
             this.BackgroundImage = global::ConsoleApplication3.Properties.Resources.Login;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(900, 562);
-            this.Controls.Add(this.btnNewATM);
+            this.Controls.Add(this.btnSemaphore);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.tbPin);
             this.Controls.Add(this.tbAccNum);
@@ -87,6 +87,7 @@
             this.MaximizeBox = false;
             this.Name = "ATMForm";
             this.Text = "ATM";
+            this.Load += new System.EventHandler(this.ATMForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -97,6 +98,6 @@
         private System.Windows.Forms.TextBox tbAccNum;
         private System.Windows.Forms.TextBox tbPin;
         private System.Windows.Forms.Button btnSubmit;
-        private System.Windows.Forms.Button btnNewATM;
+        private System.Windows.Forms.Button btnSemaphore;
     }
 }
