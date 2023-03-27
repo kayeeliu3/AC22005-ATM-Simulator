@@ -53,6 +53,7 @@ namespace ConsoleApplication3
         }
 
         static bool fileExists = false;
+        int errorCountdown = 5; // blocks card once reaches 0
         Bank bank = new Bank(); // generic bank instance
         Account activeAccount; // stores active account details
         string transactionLog = @"../../transaction_log.txt"; //text file containing transaction log
@@ -92,7 +93,13 @@ namespace ConsoleApplication3
             }
             if (!activeAccount.checkPin(j))
             {
-                MessageBox.Show("Wrong PIN.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (errorCountdown == 0)
+                {
+                    MessageBox.Show("Too many incorrect attempts. Blocking card (closing application).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                }
+                MessageBox.Show("Wrong PIN. Remaining attempts: " + errorCountdown, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorCountdown--;
                 return;
             }
 
