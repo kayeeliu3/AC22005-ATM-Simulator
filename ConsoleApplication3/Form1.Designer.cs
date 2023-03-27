@@ -82,7 +82,9 @@
             this.Controls.Add(this.tbPin);
             this.Controls.Add(this.tbAccNum);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MaximizeBox = false;
             this.Name = "ATMForm";
             this.Text = "ATM";
             this.ResumeLayout(false);
