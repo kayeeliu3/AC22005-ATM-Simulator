@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ConsoleApplication3
 {
     /// <summary>
     /// Encapsulates all features of a simple bank account.
     /// </summary>
-    internal class Account
+    public class Account
     {
         // Attributes for account.
         private static Semaphore _pool = new Semaphore(1, 1);
@@ -27,12 +28,14 @@ namespace ConsoleApplication3
         /// <param name="pin">Pin of the bank account.</param>
         /// <param name="accountNum">Account number of the bank account.</param>
         /// <param name="accountName">Name of the bank account owner.</param>
-        public Account(int balance, int pin, int accountNum, string accountName)
+        /// <param name="useSemaphore">Option to turn Semaphore on or off.</param>
+        public Account(int balance, int pin, int accountNum, string accountName, bool useSemaphore)
         {
             this.balance = balance;
             this.pin = pin;
             this.accountNum = accountNum;
             this.name = accountName;
+            this.useSemaphore = useSemaphore;
         }
 
         /// <summary>
@@ -48,7 +51,10 @@ namespace ConsoleApplication3
             }
             if (this.balance >= amount)
             {
-                balance -= amount;
+                int tempBalance = balance;
+                Thread.Sleep(10000);
+                
+                balance = tempBalance - amount;
                 if (useSemaphore)
                 {
                     _pool.Release();

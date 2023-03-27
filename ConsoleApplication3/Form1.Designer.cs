@@ -32,6 +32,7 @@
             this.tbPin = new System.Windows.Forms.TextBox();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.btnSemaphore = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tbAccNum
@@ -60,14 +61,25 @@
             // 
             // btnSemaphore
             // 
+            this.btnSemaphore.BackColor = System.Drawing.Color.LightGreen;
             this.btnSemaphore.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.btnSemaphore.Location = new System.Drawing.Point(133, 476);
+            this.btnSemaphore.Location = new System.Drawing.Point(254, 476);
             this.btnSemaphore.Name = "btnSemaphore";
-            this.btnSemaphore.Size = new System.Drawing.Size(226, 53);
+            this.btnSemaphore.Size = new System.Drawing.Size(129, 53);
             this.btnSemaphore.TabIndex = 3;
-            this.btnSemaphore.Text = "Semaphore";
-            this.btnSemaphore.UseVisualStyleBackColor = true;
-            //this.btnSemaphore.Click += new System.EventHandler(this.btnNewATM_Click);
+            this.btnSemaphore.Text = "On";
+            this.btnSemaphore.UseVisualStyleBackColor = false;
+            this.btnSemaphore.Click += new System.EventHandler(this.btnSemaphore_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(85, 487);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(153, 26);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Semaphore is:";
             // 
             // ATMForm
             // 
@@ -77,6 +89,7 @@
             this.BackgroundImage = global::ConsoleApplication3.Properties.Resources.Login;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(900, 562);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSemaphore);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.tbPin);
@@ -99,5 +112,6 @@
         private System.Windows.Forms.TextBox tbPin;
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.Button btnSemaphore;
+        private System.Windows.Forms.Label label1;
     }
 }

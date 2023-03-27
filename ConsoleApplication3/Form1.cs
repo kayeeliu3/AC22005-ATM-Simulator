@@ -30,9 +30,9 @@ namespace ConsoleApplication3
             /// </summary>
             public Bank()
             {
-                Accounts[0] = new Account(300, 1111, 111111, "Ananya");
-                Accounts[1] = new Account(750, 2222, 222222, "Josh");
-                Accounts[2] = new Account(3000, 3333, 333333, "Kae");
+                Accounts[0] = new Account(300, 1111, 111111, "Ananya", true);
+                Accounts[1] = new Account(750, 2222, 222222, "Josh", true);
+                Accounts[2] = new Account(3000, 3333, 333333, "Kae", true);
             }
 
             /// <summary>
@@ -67,6 +67,13 @@ namespace ConsoleApplication3
                 fileExists = true;
             }
             InitializeComponent();
+        }
+
+        public ATMForm(Account Account)
+        {
+            this.activeAccount = Account;
+            InitializeComponent();
+            accountMenu();
         }
 
         /// <summary>
@@ -104,6 +111,10 @@ namespace ConsoleApplication3
                 return;
             }
 
+            if (btnSemaphore.Text == "Off")
+            {
+                activeAccount.useSemaphore = false;
+            }
             accountMenu();
             btnSemaphore.Visible = false;
         }
@@ -124,7 +135,7 @@ namespace ConsoleApplication3
         /// </summary>
         private void newFormATM()
         {
-            ATMForm newATMForm = new ATMForm(); // stores instance of new ATM form
+            ATMForm newATMForm = new ATMForm(activeAccount); // stores instance of new ATM form
             newATMForm.ShowDialog();
         }
 
@@ -246,6 +257,8 @@ namespace ConsoleApplication3
          */
         private void btnWithdrawAmount_Click(object s, EventArgs e, string amount)
         {
+            MessageBox.Show("Transaction in process. Please wait up to 10 seconds.", "Working...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             amount = amount.Substring(1);
 
             if (!activeAccount.decrementBalance(Int32.Parse(amount)))
@@ -286,6 +299,7 @@ namespace ConsoleApplication3
 
         private void btnSubmitCustomAmount_Click(object sender, EventArgs e, string amount)
         {
+            MessageBox.Show("Transaction in process. Please wait up to 10 seconds.", "Working...", MessageBoxButtons.OK, MessageBoxIcon.Information);
             int parse;
             if ((!int.TryParse(amount, out parse)) || ((parse % 5) != 0))
             {
@@ -357,6 +371,21 @@ namespace ConsoleApplication3
         private void ATMForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnSemaphore_Click(object sender, EventArgs e)
+        {
+            if (btnSemaphore.Text == "On")
+            {
+                btnSemaphore.Text = "Off";
+                btnSemaphore.BackColor = Color.LightCoral;
+            }
+            else
+            {
+                btnSemaphore.Text = "On";
+                btnSemaphore.BackColor = Color.LightGreen;
+            }
+            
         }
     }
 }
