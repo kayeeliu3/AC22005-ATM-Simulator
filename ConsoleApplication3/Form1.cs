@@ -125,7 +125,7 @@ namespace ConsoleApplication3
         /// </summary>
         private void accountMenu()
         {
-            clearForm();
+            Controls.Clear();
             this.BackgroundImage = Properties.Resources.AccountMenu;
             Label lblAccountName = new Label();
             Label lblAccountNum = new Label();
@@ -178,7 +178,7 @@ namespace ConsoleApplication3
         /// <param name="e"></param>
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            clearForm();
+            Controls.Clear();
             btnNewATM.Visible = false;
             this.BackgroundImage = Properties.Resources.End;
             //initMenu();
@@ -186,7 +186,7 @@ namespace ConsoleApplication3
 
         private void btnWithdraw_Click(object sender, EventArgs e)
         {
-            clearForm();
+            Controls.Clear();
             btnNewATM.Visible = false;
             this.BackgroundImage = Properties.Resources.Cash;
 
@@ -249,7 +249,7 @@ namespace ConsoleApplication3
 
         private void btnCustomAmount_Click(object sender, EventArgs e)
         {
-            clearForm();
+            Controls.Clear();
             btnNewATM.Visible = false;
             this.BackgroundImage = Properties.Resources.CustomWithdraw;
             TextBox tbAmount = new TextBox();
@@ -296,8 +296,8 @@ namespace ConsoleApplication3
         }
 
         private void btnCheckBalance_Click(object sender, EventArgs e) 
-        { 
-            clearForm();
+        {
+            Controls.Clear();
             this.BackgroundImage = Properties.Resources.Balance;
             Label lblAccountName = new Label();
             Label lblBalance = new Label();
@@ -338,38 +338,6 @@ namespace ConsoleApplication3
             using (StreamWriter sw = File.AppendText(transactionLog))
             {
                 sw.WriteLine("Account " + activeAccount.name + " withdrew £" + amount);
-            }
-        }
-
-        /// <summary>
-        /// Clears the form, allowing for switching between screens.
-        /// (Kayee: This function has been taken and reused from the grid game assignment.)
-        /// </summary>
-        private void clearForm()
-        {
-            // Remove all buttons.
-            foreach (var btn in Controls.OfType<Button>().ToList())
-            {
-                if (btn.Name == "btnNewATM")
-                    continue;
-
-                Controls.Remove(btn);
-            }
-            // Remove all labels.
-            foreach (var lbl in Controls.OfType<Label>().ToList())
-            {
-                Controls.Remove(lbl);
-            }
-
-            // Remove all text boxes.
-            foreach (var tBox in Controls.OfType<TextBox>().ToList())
-            {
-                Controls.Remove(tBox);
-            }
-            // Remove all images.
-            foreach (var image in Controls.OfType<PictureBox>().ToList())
-            {
-                Controls.Remove(image);
             }
         }
     }
