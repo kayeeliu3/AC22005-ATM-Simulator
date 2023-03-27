@@ -95,8 +95,9 @@ namespace ConsoleApplication3
             {
                 if (errorCountdown == 0)
                 {
-                    MessageBox.Show("Too many incorrect attempts. Blocking card (closing application).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Too many incorrect attempts. Blocking card (closing ATM).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.Close();
+                    return;
                 }
                 MessageBox.Show("Wrong PIN. Remaining attempts: " + errorCountdown, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 errorCountdown--;
