@@ -52,7 +52,7 @@ namespace ConsoleApplication3
             }
         }
 
-
+        static bool fileExists = false;
         Bank bank = new Bank(); // generic bank instance
         Account activeAccount; // stores active account details
         string transactionLog = @"../../transaction_log.txt"; //text file containing transaction log
@@ -60,11 +60,11 @@ namespace ConsoleApplication3
         public ATMForm()
         {
             //create new empty transaction log
-            if (File.Exists(transactionLog))
+            if (!fileExists)
             {
-                File.Delete(transactionLog);
+                File.Create(transactionLog);
+                fileExists = true;
             }
-            File.Create(transactionLog);
             InitializeComponent();
         }
 
